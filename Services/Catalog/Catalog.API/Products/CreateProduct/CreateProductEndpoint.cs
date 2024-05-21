@@ -1,6 +1,3 @@
-
-using MediatR;
-
 namespace Catalog.API.Products.CreateProduct;
 
 public record CreateProductRequest(string Name,
@@ -8,7 +5,7 @@ public record CreateProductRequest(string Name,
                                    string Description,
                                    string ImageFile,
                                    decimal Price)
-                                   : IRequest<CreateProductResponse>;
+                                   : ICommand<CreateProductResponse>;
 public record CreateProductResponse(Guid Id);
 
 public class CreateProductEndpoint : IQueryHandler<CreateProductRequest, CreateProductResponse>
