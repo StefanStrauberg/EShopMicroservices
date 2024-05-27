@@ -4,7 +4,7 @@ public record GetProductQuery() : IRequest<GetProductsResult>;
 
 public record GetProductsResult(IEnumerable<Product> Products);
 
-internal class GetProductsHandler(IDocumentSession session) : IRequestHandler<GetProductQuery, GetProductsResult>
+internal class GetProductsQueryHandler(IDocumentSession session) : IRequestHandler<GetProductQuery, GetProductsResult>
 {
   readonly IDocumentSession _session = session
     ?? throw new ArgumentNullException(nameof(session));

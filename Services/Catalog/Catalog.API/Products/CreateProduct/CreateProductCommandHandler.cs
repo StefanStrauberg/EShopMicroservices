@@ -7,7 +7,7 @@ public record CreateProductCommand(string Name,
                                    decimal Price) : ICommand<CreateProductResult>;
 public record CreateProductResult(Guid Id);
 
-internal class CreateProductHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
   readonly IDocumentSession _session = session
     ?? throw new ArgumentNullException(nameof(session));

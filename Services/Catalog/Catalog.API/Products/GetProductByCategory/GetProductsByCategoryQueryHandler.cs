@@ -1,11 +1,10 @@
-
 namespace Catalog.API.Products.GetProductByCategory;
 
 public record GetProductsByCategoryQuery(string Category) : IQuery<GetProductsByCategoryResult>;
 
 public record GetProductsByCategoryResult(IEnumerable<Product> Products);
 
-internal class GetProductsByCategoryHandler(IDocumentSession session) : IQueryHandler<GetProductsByCategoryQuery, GetProductsByCategoryResult>
+internal class GetProductsByCategoryQueryHandler(IDocumentSession session) : IQueryHandler<GetProductsByCategoryQuery, GetProductsByCategoryResult>
 {
   readonly IDocumentSession _session = session
     ?? throw new ArgumentNullException(nameof(session));
