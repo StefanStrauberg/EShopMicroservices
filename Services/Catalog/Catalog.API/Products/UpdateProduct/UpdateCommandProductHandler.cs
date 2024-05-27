@@ -21,7 +21,7 @@ internal class UpdateCommandProductHandler(IDocumentSession session, ILogger<Upd
     _logger.LogInformation("UpdateProductCommandHandler.Handle called with {@Command}", request);
 
     // Get product by ID from the DB
-    var product = await session.LoadAsync<Product>(request.Id, cancellationToken);
+    var product = await _session.LoadAsync<Product>(request.Id, cancellationToken);
 
     // Throw the exception if the product not found
     if (product is null)
@@ -35,8 +35,8 @@ internal class UpdateCommandProductHandler(IDocumentSession session, ILogger<Upd
     product.Price = request.Price;
 
     // Save changes
-    session.Update(product);
-    await session.SaveChangesAsync(cancellationToken);
+    _session.Update(product);
+    await _session.SaveChangesAsync(cancellationToken);
 
     // Return UpdateProductCommandResult result
     return new UpdateProductCommandResult(true);

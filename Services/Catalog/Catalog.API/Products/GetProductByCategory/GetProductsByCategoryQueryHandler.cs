@@ -13,6 +13,7 @@ internal class GetProductsByCategoryQueryHandler(IDocumentSession session) : IQu
   {
     // Get product by category from the DB
     var products = await _session.Query<Product>().Where(x => x.Category.Contains(request.Category)).ToListAsync(token: cancellationToken);
+
     // Return GetProductByCategoryResult result
     return new GetProductsByCategoryResult(products);
   }

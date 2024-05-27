@@ -11,6 +11,7 @@ internal class CreateProductCommandHandler(IDocumentSession session) : ICommandH
 {
   readonly IDocumentSession _session = session
     ?? throw new ArgumentNullException(nameof(session));
+
   public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
   {
     // create Product entity from command object
