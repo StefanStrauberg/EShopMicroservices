@@ -16,7 +16,7 @@ internal class GetProductByIdQueryHandler(IDocumentSession session) : IRequestHa
 
     // Throw an exception if the product is null
     if (product is null)
-      throw new ProductNotFoundException();
+      throw new ProductNotFoundException(request.Id);
 
     // Return GetProductByIdResult result
     return new GetProductByIdResult(product);
