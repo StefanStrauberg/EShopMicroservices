@@ -14,18 +14,13 @@ public class DeleteProductCommandValidator : AbstractValidator<DeleteProductComm
   }
 }
 
-internal class DeleteProductCommandHandler(IDocumentSession session, ILogger<DeleteProductCommandHandler> logger) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
+internal class DeleteProductCommandHandler(IDocumentSession session) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
 {
   readonly IDocumentSession _session = session
     ?? throw new ArgumentNullException(nameof(session));
-  readonly ILogger<DeleteProductCommandHandler> _logger = logger
-    ?? throw new ArgumentNullException(nameof(logger));
 
   public async Task<DeleteProductResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
   {
-    // Logging inforamtion that we going to delete a product
-    _logger.LogInformation("DeleteProductCommandHandler.Handle called with {@Command}", request);
-
     // Delete the product from the DB
     _session.Delete<Product>(request.Id);
     await _session.SaveChangesAsync(cancellationToken);
